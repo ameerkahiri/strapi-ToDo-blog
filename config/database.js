@@ -1,4 +1,5 @@
-const path = require('path');
+// local ip connection
+/*const path = require('path');
 
 module.exports = ({ env }) => ({
   connection: {
@@ -7,5 +8,18 @@ module.exports = ({ env }) => ({
       filename: path.join(__dirname, '..', env('DATABASE_FILENAME', '.tmp/data.db')),
     },
     useNullAsDefault: true,
+  },
+});*/
+
+// google cloud connection
+module.exports = ({ env }) => ({
+  connection: {
+    client: 'postgres',
+    connection: {
+      host: `/cloudsql/${env('INSTANCE_CONNECTION_NAME')}`,
+      database: env('DATABASE_NAME'),
+      user: env('DATABASE_USER'),
+      password: env('DATABASE_PASSWORD'),
+    },
   },
 });
